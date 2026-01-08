@@ -6,7 +6,7 @@
 // │  CONFIGURE YOUR OVH SERVER URL HERE                                     │
 // │  Example: 'https://your-ovh-server.com' or 'http://123.45.67.89:3000'  │
 // └─────────────────────────────────────────────────────────────────────────┘
-const API_BASE = 'https://techno-paradise-barely-hughes.trycloudflare.com';
+const API_BASE = 'https://your-cloudflare-tunnel.trycloudflare.com';
 
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -39,6 +39,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   console.log('💼 Pumpfolio Dashboard Loaded');
   console.log('📡 API Server:', API_BASE);
   
+  // Show welcome popup (if not dismissed before)
+  initWelcomePopup();
+  
   // Check if API is configured
   if (API_BASE.includes('your-') || API_BASE === '') {
     showWaitingState();
@@ -67,6 +70,46 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadChart();
   }
 });
+
+// Welcome Popup
+function initWelcomePopup() {
+  const popup = document.getElementById('welcome-popup');
+  const closeBtn = document.getElementById('popup-close-btn');
+  const dontShowCheckbox = document.getElementById('dont-show-again');
+  
+  if (!popup || !closeBtn) return;
+  
+  // Check if user dismissed before
+  const dismissed = localStorage.getItem('pumpfolio-popup-dismissed');
+  if (dismissed === 'true') {
+    popup.classList.add('hidden');
+    return;
+  }
+  
+  // Close button handler
+  closeBtn.addEventListener('click', () => {
+    popup.classList.add('hidden');
+    
+    // Save preference if checkbox is checked
+    if (dontShowCheckbox && dontShowCheckbox.checked) {
+      localStorage.setItem('pumpfolio-popup-dismissed', 'true');
+    }
+  });
+  
+  // Close on overlay click (outside modal)
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      popup.classList.add('hidden');
+    }
+  });
+  
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !popup.classList.contains('hidden')) {
+      popup.classList.add('hidden');
+    }
+  });
+}
 
 function showWaitingState() {
   caDisplay.textContent = 'Configure API_BASE in script.js';
@@ -412,4 +455,3 @@ window.pumpfolioDebug = {
   loadChart,
   currentMint: () => currentMint
 };
-
