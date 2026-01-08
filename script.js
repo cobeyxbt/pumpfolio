@@ -6,7 +6,7 @@
 // │  CONFIGURE YOUR OVH SERVER URL HERE                                     │
 // │  Example: 'https://your-ovh-server.com' or 'http://123.45.67.89:3000'  │
 // └─────────────────────────────────────────────────────────────────────────┘
-const API_BASE = 'https://techno-paradise-barely-hughes.trycloudflare.com';
+const API_BASE = 'https://your-cloudflare-tunnel.trycloudflare.com';
 
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -27,10 +27,12 @@ const tokenNameEl = document.getElementById('token-name');
 const tokenPriceEl = document.getElementById('token-price');
 const distributionHistoryEl = document.getElementById('distribution-history');
 const memecoinsList = document.getElementById('memecoins-list');
-const coinsBadge = document.getElementById('coins-badge');
 const minTokensEl = document.getElementById('min-tokens');
 const minCyclesEl = document.getElementById('min-cycles');
 const intervalEl = document.getElementById('interval');
+const totalTokensPurchasedEl = document.getElementById('total-tokens-purchased');
+const totalUsdValueEl = document.getElementById('total-usd-value');
+const coinsBadge = document.getElementById('coins-badge');
 
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
@@ -178,10 +180,19 @@ async function fetchMemecoins() {
     const data = await response.json();
     
     if (data.coins && data.coins.length > 0) {
-      coinsBadge.textContent = `${data.coins.length} coins`;
+      if (coinsBadge) coinsBadge.textContent = `${data.coins.length} coins`;
       
-      // Render memecoin list with images and copy button
-      memecoinsList.innerHTML = data.coins.map((coin, i) => `
+      // Calculate totals
+      let totalTokens = 0;
+      let totalUsdValue = 0;
+      
+      // Render memecoin grid with images and copy button
+      memecoinsList.innerHTML = data.coins.map((coin, i) => {
+        // Track totals (if we have balance/value data)
+        if (coin.balance) totalTokens += coin.balance;
+        if (coin.usdValue) totalUsdValue += coin.usdValue;
+        
+        return `
         <div class="memecoin-item">
           <div class="memecoin-info">
             <span class="memecoin-rank">${i + 1}</span>
@@ -196,7 +207,16 @@ async function fetchMemecoins() {
             <button class="copy-ca-btn" data-ca="${coin.mint}" title="Copy CA">📋</button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
+      
+      // Update portfolio summary
+      if (totalTokensPurchasedEl) {
+        totalTokensPurchasedEl.textContent = formatNumber(totalTokens);
+      }
+      if (totalUsdValueEl) {
+        totalUsdValueEl.textContent = formatUSD(totalUsdValue);
+      }
       
       // Add click handlers for copy buttons
       document.querySelectorAll('.copy-ca-btn').forEach(btn => {
@@ -392,4 +412,3 @@ window.pumpfolioDebug = {
   loadChart,
   currentMint: () => currentMint
 };
-

@@ -79,81 +79,74 @@
       </div>
     </section>
 
-    <!-- Main Content Grid -->
-    <div class="content-grid">
-      <!-- Memecoins Section -->
-      <section class="panel memecoins-panel">
-        <div class="panel-header">
-          <h2 class="panel-title">
-            <span class="title-icon">💎</span>
-            MEME PORTFOLIO
-          </h2>
-          <span class="panel-badge" id="coins-badge">0 coins</span>
-        </div>
-        <div class="memecoins-list" id="memecoins-list">
-          <div class="loading-state">
-            <div class="spinner"></div>
-            <span>Loading...</span>
-          </div>
-        </div>
-      </section>
+    <!-- Eligibility (Compact) -->
+    <section class="eligibility-bar">
+      <div class="eligibility-item">
+        <span class="eligibility-icon">🪙</span>
+        <span class="eligibility-value" id="min-tokens">100,000</span>
+        <span class="eligibility-label">MIN TOKENS</span>
+      </div>
+      <div class="eligibility-divider"></div>
+      <div class="eligibility-item">
+        <span class="eligibility-icon">🔄</span>
+        <span class="eligibility-value" id="min-cycles">2</span>
+        <span class="eligibility-label">MIN CYCLES</span>
+      </div>
+      <div class="eligibility-divider"></div>
+      <div class="eligibility-item">
+        <span class="eligibility-icon">⏱️</span>
+        <span class="eligibility-value" id="interval">10m</span>
+        <span class="eligibility-label">INTERVAL</span>
+      </div>
+    </section>
 
-      <!-- Chart Section -->
-      <section class="panel chart-panel">
-        <div class="panel-header">
-          <h2 class="panel-title">
-            <span class="title-icon">📊</span>
-            Price Chart
-          </h2>
-          <div class="token-price-info">
-            <span id="token-name">---</span>
-            <span id="token-price" class="price-tag">$---</span>
-          </div>
-        </div>
-        <div class="chart-container" id="chart-container">
-          <div class="loading-state">
-            <div class="spinner"></div>
-            <span>Loading chart...</span>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <!-- Eligibility Info -->
-    <section class="panel eligibility-panel">
+    <!-- Meme Portfolio (Full Width) -->
+    <section class="panel memecoins-panel full-width">
       <div class="panel-header">
         <h2 class="panel-title">
-          <span class="title-icon">✨</span>
-          Eligibility Requirements
+          <span class="title-icon">💎</span>
+          MEME PORTFOLIO
         </h2>
+        <div class="portfolio-summary">
+          <span class="portfolio-stat">
+            <span id="total-tokens-purchased">0</span> tokens
+          </span>
+          <span class="portfolio-divider">|</span>
+          <span class="portfolio-stat">
+            $<span id="total-usd-value">0.00</span> value
+          </span>
+        </div>
       </div>
-      <div class="eligibility-grid">
-        <div class="eligibility-card">
-          <div class="eligibility-icon">🪙</div>
-          <div class="eligibility-info">
-            <span class="eligibility-value" id="min-tokens">100,000</span>
-            <span class="eligibility-label">MIN TOKENS</span>
-          </div>
+      <div class="memecoins-grid" id="memecoins-list">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Loading...</span>
         </div>
-        <div class="eligibility-card">
-          <div class="eligibility-icon">🔄</div>
-          <div class="eligibility-info">
-            <span class="eligibility-value" id="min-cycles">2</span>
-            <span class="eligibility-label">MIN CYCLES</span>
-          </div>
+      </div>
+    </section>
+
+    <!-- Chart Section (Full Width) -->
+    <section class="panel chart-panel full-width">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="title-icon">📊</span>
+          Price Chart
+        </h2>
+        <div class="token-price-info">
+          <span id="token-name">---</span>
+          <span id="token-price" class="price-tag">$---</span>
         </div>
-        <div class="eligibility-card">
-          <div class="eligibility-icon">⏱️</div>
-          <div class="eligibility-info">
-            <span class="eligibility-value" id="interval">10m</span>
-            <span class="eligibility-label">INTERVAL</span>
-          </div>
+      </div>
+      <div class="chart-container" id="chart-container">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <span>Loading chart...</span>
         </div>
       </div>
     </section>
 
     <!-- Distribution History -->
-    <section class="panel history-panel">
+    <section class="panel history-panel full-width">
       <div class="panel-header">
         <h2 class="panel-title">
           <span class="title-icon">📜</span>
