@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PUMPFOLIO</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="gradient-bg"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <img src="logo.png" alt="Pumpfolio" onerror="this.style.display='none'; this.parentElement.innerHTML='💼';">
+        </div>
+        <h1 class="brand-name">PUMPFOLIO</h1>
+      </div>
+      
+      <div class="header-right">
+        <div class="countdown-box">
+          <span class="countdown-label">NEXT CYCLE</span>
+          <span class="countdown-timer" id="countdown">--:--</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Stats -->
+    <section class="hero-stats">
+      <div class="stat-card primary">
+        <span class="stat-icon">◎</span>
+        <div class="stat-info">
+          <span class="stat-value" id="total-sol">0.00</span>
+          <span class="stat-label">SOL CLAIMED</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <span class="stat-icon">🔄</span>
+        <div class="stat-info">
+          <span class="stat-value" id="cycles">0</span>
+          <span class="stat-label">CYCLES</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <span class="stat-icon">👥</span>
+        <div class="stat-info">
+          <span class="stat-value" id="eligible-holders">0</span>
+          <span class="stat-label">ELIGIBLE HOLDERS</span>
+        </div>
+      </div>
+      
+      <div class="stat-card">
+        <span class="stat-icon">🪙</span>
+        <div class="stat-info">
+          <span class="stat-value" id="memecoins-count">0</span>
+          <span class="stat-label">MEMECOINS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contract Address -->
+    <section class="ca-section">
+      <div class="ca-container">
+        <span class="ca-label">TOKEN CONTRACT</span>
+        <div class="ca-wrapper">
+          <code class="ca-address" id="ca-display">Waiting for server...</code>
+          <button class="copy-btn" id="copy-ca-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Memecoins Section -->
+      <section class="panel memecoins-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">🚀</span>
+            Active Memecoins
+          </h2>
+          <span class="panel-badge" id="coins-badge">0 coins</span>
+        </div>
+        <div class="memecoins-list" id="memecoins-list">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <span>Loading...</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chart Section -->
+      <section class="panel chart-panel">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            <span class="title-icon">📊</span>
+            Price Chart
+          </h2>
+          <div class="token-price-info">
+            <span id="token-name">---</span>
+            <span id="token-price" class="price-tag">$---</span>
+          </div>
+        </div>
+        <div class="chart-container" id="chart-container">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <span>Loading chart...</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Eligibility Info -->
+    <section class="panel eligibility-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="title-icon">✨</span>
+          Eligibility Requirements
+        </h2>
+      </div>
+      <div class="eligibility-grid">
+        <div class="eligibility-card">
+          <div class="eligibility-icon">🪙</div>
+          <div class="eligibility-info">
+            <span class="eligibility-value" id="min-tokens">100,000</span>
+            <span class="eligibility-label">Minimum Tokens</span>
+          </div>
+        </div>
+        <div class="eligibility-card">
+          <div class="eligibility-icon">📅</div>
+          <div class="eligibility-info">
+            <span class="eligibility-value" id="min-days">1</span>
+            <span class="eligibility-label">Days Holding</span>
+          </div>
+        </div>
+        <div class="eligibility-card">
+          <div class="eligibility-icon">⏱️</div>
+          <div class="eligibility-info">
+            <span class="eligibility-value" id="interval">10m</span>
+            <span class="eligibility-label">Cycle Interval</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Distribution History -->
+    <section class="panel history-panel">
+      <div class="panel-header">
+        <h2 class="panel-title">
+          <span class="title-icon">📜</span>
+          Cycle History
+        </h2>
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>TIME</th>
+              <th>SOL CLAIMED</th>
+              <th>USD VALUE</th>
+              <th>COINS BOUGHT</th>
+              <th>RECIPIENTS</th>
+            </tr>
+          </thead>
+          <tbody id="distribution-history">
+            <tr class="empty-row">
+              <td colspan="5">No cycles yet...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://pump.fun" target="_blank" class="footer-link">pump.fun</a>
+          <span class="divider">•</span>
+          <a href="https://dexscreener.com" target="_blank" class="footer-link">dexscreener</a>
+          <span class="divider">•</span>
+          <a href="https://solscan.io" target="_blank" class="footer-link">solscan</a>
+        </div>
+        <p class="footer-note">Automated rewards • 24/7 operation</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
