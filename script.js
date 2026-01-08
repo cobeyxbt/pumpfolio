@@ -6,7 +6,7 @@
 // │  CONFIGURE YOUR OVH SERVER URL HERE                                     │
 // │  Example: 'https://your-ovh-server.com' or 'http://123.45.67.89:3000'  │
 // └─────────────────────────────────────────────────────────────────────────┘
-const API_BASE = 'https://techno-paradise-barely-hughes.trycloudflare.com';
+const API_BASE = 'https://your-cloudflare-tunnel.trycloudflare.com';
 
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -29,7 +29,7 @@ const distributionHistoryEl = document.getElementById('distribution-history');
 const memecoinsList = document.getElementById('memecoins-list');
 const coinsBadge = document.getElementById('coins-badge');
 const minTokensEl = document.getElementById('min-tokens');
-const minDaysEl = document.getElementById('min-days');
+const minCyclesEl = document.getElementById('min-cycles');
 const intervalEl = document.getElementById('interval');
 
 // Initialize
@@ -101,8 +101,8 @@ async function loadConfig() {
     if (config.minTokensToQualify) {
       minTokensEl.textContent = formatNumber(config.minTokensToQualify);
     }
-    if (config.minHoldingDays) {
-      minDaysEl.textContent = config.minHoldingDays;
+    if (config.minConsecutiveCycles !== undefined) {
+      minCyclesEl.textContent = config.minConsecutiveCycles;
     }
     if (config.intervalSeconds) {
       intervalEl.textContent = formatInterval(config.intervalSeconds);
@@ -180,19 +180,38 @@ async function fetchMemecoins() {
     if (data.coins && data.coins.length > 0) {
       coinsBadge.textContent = `${data.coins.length} coins`;
       
-      // Render memecoin list
+      // Render memecoin list with images and copy button
       memecoinsList.innerHTML = data.coins.map((coin, i) => `
         <div class="memecoin-item">
           <div class="memecoin-info">
             <span class="memecoin-rank">${i + 1}</span>
+            ${coin.image ? `<img src="${coin.image}" alt="${coin.symbol}" class="memecoin-icon" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">` : ''}<span class="memecoin-icon-placeholder" ${coin.image ? 'style="display:none"' : ''}>🪙</span>
             <div class="memecoin-details">
               <div class="memecoin-symbol">${coin.symbol || '???'}</div>
               <div class="memecoin-name">${coin.name || coin.mint.slice(0, 12) + '...'}</div>
             </div>
           </div>
-          <span class="memecoin-mc">${coin.marketCap ? formatMarketCap(coin.marketCap) : '---'}</span>
+          <div class="memecoin-actions">
+            <span class="memecoin-mc">${coin.marketCap ? formatMarketCap(coin.marketCap) : '---'}</span>
+            <button class="copy-ca-btn" data-ca="${coin.mint}" title="Copy CA">📋</button>
+          </div>
         </div>
       `).join('');
+      
+      // Add click handlers for copy buttons
+      document.querySelectorAll('.copy-ca-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          e.stopPropagation();
+          const ca = btn.dataset.ca;
+          try {
+            await navigator.clipboard.writeText(ca);
+            btn.textContent = '✓';
+            setTimeout(() => btn.textContent = '📋', 1500);
+          } catch (err) {
+            console.error('Copy failed:', err);
+          }
+        });
+      });
     } else {
       memecoinsList.innerHTML = `
         <div class="loading-state">
@@ -373,5 +392,3 @@ window.pumpfolioDebug = {
   loadChart,
   currentMint: () => currentMint
 };
-
-

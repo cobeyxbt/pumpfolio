@@ -410,7 +410,21 @@ body {
 .memecoin-rank {
   font-size: 0.5rem;
   color: var(--text-muted);
-  width: 24px;
+  width: 20px;
+}
+
+.memecoin-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  image-rendering: pixelated;
+}
+
+.memecoin-icon-placeholder {
+  font-size: 1.5rem;
+  width: 32px;
+  text-align: center;
 }
 
 .memecoin-details {
@@ -429,8 +443,29 @@ body {
   color: var(--text-muted);
 }
 
+.memecoin-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
 .memecoin-mc {
   font-size: 0.55rem;
+  color: var(--accent-primary);
+}
+
+.copy-ca-btn {
+  background: transparent;
+  border: 2px solid var(--border-dim);
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  padding: 4px 6px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.copy-ca-btn:hover {
+  border-color: var(--accent-primary);
   color: var(--accent-primary);
 }
 
@@ -499,6 +534,105 @@ body {
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ELIGIBILITY PANEL
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.eligibility-panel {
+  margin-bottom: var(--space-lg);
+}
+
+.eligibility-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  padding: var(--space-lg);
+}
+
+.eligibility-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--bg-elevated);
+  border: 2px solid var(--border-dim);
+}
+
+.eligibility-icon {
+  font-size: 1.5rem;
+}
+
+.eligibility-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.eligibility-value {
+  font-size: 0.7rem;
+  color: var(--accent-primary);
+}
+
+.eligibility-label {
+  font-size: 0.4rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 768px) {
+  .eligibility-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HISTORY TABLE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.history-panel {
+  margin-bottom: var(--space-lg);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  padding: var(--space-md);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  padding: var(--space-md);
+  text-align: left;
+  font-size: 0.45rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid var(--border-dim);
+  white-space: nowrap;
+}
+
+.data-table td {
+  padding: var(--space-md);
+  font-size: 0.5rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-dim);
+  white-space: nowrap;
+}
+
+.data-table tr:hover td {
+  background: var(--bg-elevated);
+}
+
+.empty-row td {
+  text-align: center;
+  padding: var(--space-xl);
+  color: var(--text-muted);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
