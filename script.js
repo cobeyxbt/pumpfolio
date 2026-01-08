@@ -6,7 +6,7 @@
 // │  CONFIGURE YOUR OVH SERVER URL HERE                                     │
 // │  Example: 'https://your-ovh-server.com' or 'http://123.45.67.89:3000'  │
 // └─────────────────────────────────────────────────────────────────────────┘
-const API_BASE = 'https://your-cloudflare-tunnel.trycloudflare.com';
+const API_BASE = 'https://delaware-dramatic-riders-phone.trycloudflare.com';
 
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -373,3 +373,4 @@ window.pumpfolioDebug = {
   loadChart,
   currentMint: () => currentMint
 };
+
