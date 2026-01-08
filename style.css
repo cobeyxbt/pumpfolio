@@ -424,27 +424,6 @@ body {
 }
 
 /* Memecoins Panel */
-.memecoins-panel .panel-header {
-  flex-wrap: wrap;
-  gap: var(--space-md);
-}
-
-.portfolio-summary {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-}
-
-.portfolio-stat {
-  font-size: 0.55rem;
-  color: var(--accent-primary);
-}
-
-.portfolio-divider {
-  color: var(--text-muted);
-  font-size: 0.5rem;
-}
-
 .memecoins-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
